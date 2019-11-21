@@ -498,7 +498,7 @@ void init_looking_for_broker( void )
 }
 
 /*=====================================
- * init_looking_for_broker
+ * process_looking_for_broker
  * 
  * This function attempts to connect to the MQTT broker.
  */
