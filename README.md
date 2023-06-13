@@ -4,7 +4,7 @@
 
 MQTT stands for Message Queue Telemetry Transport.  It is a lightweight messaging protocol based on a "Publish/Subscribe" model (rather than "Client/Server").
 
-[mqtt_broker_client.pdf](https://github.com/gsalaman/8266_mqtt_basics/files/11737146/mqtt_broker_client.pdf)
+![Slide1](https://github.com/gsalaman/8266_mqtt_basics/assets/43499190/4ef1422d-7050-4fb4-aabd-ed340ee50233)
 
 The central entity in an MQTT system is the Broker.  The broker is responsible for managing all the messages in the system; think of it as the "post office".
 
