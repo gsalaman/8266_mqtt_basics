@@ -16,7 +16,7 @@ The beauty of MQTT is that the client doesn't need to know the details of how to
 
 Each MQTT message has a topic and a payload.
 
-Clients can subscribe or publish to topics; they will only recieve messages that they've subscribed to.  Topics are structred like old-school directory listings...which we'll explain in the example below.
+Clients can subscribe or publish to topics; they will only recieve messages that they've subscribed to.  
 
 ### Messaging Example
 Consider a simple home automation system.  We'll have two clients: a "light controller" for the living room lights, and a "phone app" to control those lights.
@@ -30,12 +30,12 @@ We'll say that our light_controller is connected to a switch than can turn on an
 
 When the phone-app (or anyone else) wants to remotely turn the lights on or off, they can also send a message with the topic "living_room_lights" and payload "on" or "off".
 
-The light controller client will **SUBSCRIBE** to the message; when it sees it, it will set the light either on or off.
+The light controller client will **SUBSCRIBE** to the "living_room_lights" topic; when it sees it, it will set the light either on or off.
 
 One other nifty thing here:  the phone client can ALSO subscribe to that message so that it knows when someone flips the switch at the lights themselves.
 
 
 ## Getting the 8266 on WiFi
+Now that we're using MQTT as our upper-level protocol, we need some way to connect our devices to the internet.  In this example, we'll be using WiFi.
 
-## Sample MQTT exchange
  
