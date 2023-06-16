@@ -35,7 +35,21 @@ The light controller client will **SUBSCRIBE** to the "living_room_lights" topic
 One other nifty thing here:  the phone client can ALSO subscribe to that message so that it knows when someone flips the switch at the lights themselves.
 
 
-## Getting the 8266 on WiFi
-Now that we're using MQTT as our upper-level protocol, we need some way to connect our devices to the internet.  In this example, we'll be using WiFi.
+## Getting the 8266 connected
+Now that we're using MQTT as our upper-level protocol, we need some way to connect our devices to the internet.  In this example, we'll be using WiFi, courtesy of the "ESP8266Wifi.h" library.
+
+We're going to program the 8266 with the SSID and Password for your wifi network, but we're NOT going to hardcode those into the code for security reasons...instead, we'll program those into Non-volatile memory  Excercise for the reader:  why would hardcoding be bad?
+
+Then, we'll point our client at a broker.  At this point, we're ready to exchange MQTT messages.
+
+To do this, we've got 4 states:
+* Offline (where we set SSID, Password, and Broker)
+* Disconnected (where we're looking for WiFi)
+* Looking for Broker
+* Active (where we're ready to exchange MQTT messages)
+
+
+
+
 
  
