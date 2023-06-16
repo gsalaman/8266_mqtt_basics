@@ -42,11 +42,32 @@ We're going to program the 8266 with the SSID and Password for your wifi network
 
 Then, we'll point our client at a broker.  At this point, we're ready to exchange MQTT messages.
 
-To do this, we've got 4 states:
+### The State Machine
+We've got 4 states:
 * Offline (where we set SSID, Password, and Broker)
 * Disconnected (where we're looking for WiFi)
 * Looking for Broker
 * Active (where we're ready to exchange MQTT messages)
+
+We've got the following enum to define these:
+```
+/* state of "how far" we're connected */
+typedef enum
+{
+  STATE_OFFLINE = 0,             // Not looking for network...inputting parameters.
+  STATE_DISCONNECT,              // Disconnected, but looking for WiFi
+  STATE_LOOKING_FOR_BROKER,      // Connected to WiFi and looking for broker
+  STATE_ACTIVE                   // Connected to broker and exchanging MQTT messages.
+} state_type;
+```
+
+Each state will have an initialization function and a processing function.  Each of the processing functions returns the `state_type` of our next state.
+
+The main loop has a big switch statement...it checks our current state and calls the appropriate processing function.
+
+One side note here:  we're looking for any serial input to kick us into `STATE_OFFLINE` to configure our NV parameters.  This is coded a little klunkilly; bonus points for cleaning this up in your implementation.
+
+
 
 
 
