@@ -8,6 +8,8 @@ MQTT stands for Message Queue Telemetry Transport.  It is a lightweight messagin
 
 The central entity in an MQTT system is the Broker.  The broker is responsible for managing all the messages in the system; think of it as the "post office".
 
+***GLENN*** insead of post office, like and subscribe model.
+
 Users define Clients to talk with the broker.  Each client can:
 * "Publish" messages (making them available to other clients)
 * "Subscribe" to messages (reading things that other clients have published)
