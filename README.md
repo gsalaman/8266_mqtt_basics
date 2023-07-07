@@ -92,6 +92,40 @@ At this point, we're ready to exit offline and test our setup...so hit `5'.
 
 This should kick the state machine into gear...you should see it first connecting to wifi, then to the broker, and then going into active state.  In our active state, we send a letter every 5 seconds, going from a to z.
 
+## Using MQTT, or, a closer look at the "Active" state
+In our example, we're both publishing and subscribing to messages.  We'll look at the mechanics of each below.
+
+### Client Initialization
+To create our client, we've got the following objects at the top of our ino file:
+```
+WiFiClient wclient;
+PubSubClient client(wclient); // Setup MQTT client
+```
+
+When we hit `STATE_LOOKING_FOR_BROKER`, we initialize this client and point it to the IP address of our broker.  This is all done in the `init_looking_for_broker` function.
+
+Then, in `process_looking_for_broker`, we try and connect.  If successful, we'll transition to `STATE_ACTIVE`.
+
+### Subscribing to Messages
+In order to subscribe to messages, we need a callback function.  In this example, it's `mqtt_callback`, near the top of the file.  We attach this callback to our client inside of the `init_looking_for_broker()` function.
+
+This function will be called whenever a subscribed message is received...in our example, we just print out the topic and payload.
+
+Inside of `init_active()`, we do the actual subscirption via the following line:
+```
+   client.subscribe("letter");
+```
+This subscribes us to the "letter" topic...whenever anyone publishes a message with the topic "letter", we'll call `mqtt_callback`...which will then print out that message.
+
+Note that this will get called even if it's us that publishes the message.
+
+### Publishing Messages
+Inside of `process_active()`, we'll publish a letter to the topic "letter" every 5 seconds.  This is done with the following line:
+```
+    client.publish("letter", current_letter);
+```
+
+Then, inside our processing loop, we need to be periodically calling `client.loop()`, which will allow the MQTT library to send and receive messages, and will allow our callback to run if there are messages pending for us.
 
 
 
